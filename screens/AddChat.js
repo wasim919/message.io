@@ -43,7 +43,10 @@ export default AddChat
 
 const styles = StyleSheet.create({
 	screen: {
-		flex: 1
+		flex: 1,
+		backgroundColor: "white",
+		padding: 30,
+		height: "100%"
 		// justifyContent: "center",
 		// alignItems: "center"
 	},
