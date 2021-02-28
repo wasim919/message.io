@@ -34,7 +34,7 @@ const AddChat = ({ navigation }) => {
 				leftIcon={<Icon name="wechat" type="antdesign" size={24} color="black" />}
 				onSubmitEditing={createChat}
 			/>
-			<Button containerStyle={styles.button} title="Add new Chat" onPress={createChat} />
+			<Button disabled={!input} containerStyle={styles.button} title="Add new Chat" onPress={createChat} />
 		</View>
 	)
 }
