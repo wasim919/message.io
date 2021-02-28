@@ -84,7 +84,6 @@ const ChatScreen = ({ navigation, route }) => {
 			)
 		return unsubscribe
 	}, [route])
-	console.log(messages)
 	return (
 		<SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
 			<StatusBar style="light" />
@@ -95,7 +94,32 @@ const ChatScreen = ({ navigation, route }) => {
 			>
 				<TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
 					<>
-						<ScrollView></ScrollView>
+						<ScrollView contentContainerStyle={{ paddingTop: 15 }}>
+							{messages.map(({ id, data }) =>
+								data.email === auth.currentUser.email ? (
+									<View key={id} style={styles.receiver}>
+										<Avatar
+											containerStyle={{ position: "absolute", bottom: -15, right: -5 }}
+											rounded
+											size={30}
+											source={{ uri: data.photoURL }}
+										/>
+										<Text style={styles.receiverText}>{data.message}</Text>
+									</View>
+								) : (
+									<View key={id} style={styles.sender}>
+										<Avatar
+											containerStyle={{ position: "absolute", bottom: -15, left: -5 }}
+											rounded
+											size={30}
+											source={{ uri: data.photoURL }}
+										/>
+										<Text style={styles.senderText}>{data.message}</Text>
+										<Text style={styles.senderName}>{data.displayName}</Text>
+									</View>
+								)
+							)}
+						</ScrollView>
 						<View style={styles.footer}>
 							<TextInput
 								value={input}
@@ -137,5 +161,43 @@ const styles = StyleSheet.create({
 		padding: 10,
 		color: "grey",
 		borderRadius: 30
+	},
+	receiver: {
+		padding: 15,
+		backgroundColor: "#ECECEC",
+		alignSelf: "flex-end",
+		borderRadius: 20,
+		marginRight: 15,
+		marginBottom: 20,
+		maxWidth: "80%",
+		position: "relative"
+	},
+	sender: {
+		padding: 15,
+		backgroundColor: "#2B68E6",
+		alignSelf: "flex-start",
+		borderRadius: 20,
+		marginRight: 15,
+		maxWidth: "80%",
+		marginBottom: 20,
+		position: "relative"
+	},
+	senderName: {
+		left: 10,
+		paddingRight: 10,
+		fontSize: 10,
+		color: "white"
+	},
+	senderText: {
+		color: "white",
+		fontWeight: "500",
+		marginLeft: 10,
+		marginBottom: 15
+	},
+	receiverText: {
+		color: "black",
+		fontWeight: "500",
+		marginLeft: 10,
+		marginBottom: 15
 	}
 })
