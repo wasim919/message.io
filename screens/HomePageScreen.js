@@ -1,5 +1,5 @@
 import React, { useLayoutEffect } from "react"
-import { StyleSheet, ScrollView, SafeAreaView, View } from "react-native"
+import { StyleSheet, ScrollView, SafeAreaView, View, TouchableOpacity } from "react-native"
 import { Avatar } from "react-native-elements"
 
 import { auth } from "../firebase"
@@ -7,6 +7,13 @@ import { auth } from "../firebase"
 import CustomListItem from "../components/CustomListItem"
 
 const HomePageScreen = ({ navigation }) => {
+	const signOutUser = () => {
+		auth.signOut()
+			.then(() => {
+				navigation.replace("Login")
+			})
+			.catch((err) => console.log(err.message))
+	}
 	useLayoutEffect(() => {
 		navigation.setOptions({
 			title: "Signal",
@@ -14,9 +21,11 @@ const HomePageScreen = ({ navigation }) => {
 			headerTitleStyle: { color: "black" },
 			headerTintColor: "black",
 			headerLeft: () => (
-				<View style={{ marginLeft: 20 }}>
-					<Avatar rounded source={{ uri: auth?.currentUser?.photoURL }} />
-				</View>
+				<TouchableOpacity onPress={signOutUser} activeOpacity={0.5}>
+					<View style={{ marginLeft: 20 }}>
+						<Avatar rounded source={{ uri: auth?.currentUser?.photoURL }} />
+					</View>
+				</TouchableOpacity>
 			)
 		})
 	}, [])
