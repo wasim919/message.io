@@ -13,6 +13,7 @@ const RegisterScreen = ({ navigation }) => {
 	const register = () => {
 		auth.createUserWithEmailAndPassword(email, password)
 			.then((authUser) => {
+				console.log(authUser)
 				authUser.user.updateProfile({
 					displayName: name,
 					photoURL: imageURL || "https://cencup.com/wp-content/uploads/2019/07/avatar-placeholder.png"
