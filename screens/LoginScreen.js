@@ -19,7 +19,9 @@ const LoginScreen = ({ navigation, route }) => {
 			unsubscribe()
 		}
 	}, [])
-	const signIn = () => {}
+	const signIn = () => {
+		auth.signInWithEmailAndPassword(email, password).catch((err) => alert(err.message))
+	}
 	const register = () => {
 		navigation.navigate("Register")
 	}
@@ -37,6 +39,7 @@ const LoginScreen = ({ navigation, route }) => {
 					secureTextEntry
 					type="password"
 					value={password}
+					onSubmitEditing={signIn}
 					onChangeText={(password) => setPassword(password)}
 				/>
 			</View>
