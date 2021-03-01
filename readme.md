@@ -3,7 +3,8 @@
 ### Steps for running on your local machine:
 
 1. Clone the repo
-2. Go to the project directory, open cmd and type the following commands:
+2. Make a firebase project and edit the firebase configuration file in firebase.js.
+3. Go to the project directory, open cmd and type the following commands:
 
     i. npm install
 
